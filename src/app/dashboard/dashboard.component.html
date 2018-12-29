@@ -1,0 +1,14 @@
+<div style="float:right;margin: 20px;">
+    <span>Logged in as </span> <b>{{loggesInUser}}</b>
+    <span><a href="javascript:void(0);" (click)="logout();">Logout</a></span>
+</div>
+<section id="team" class="pb-5">
+    <div class="container">
+        <h5 class="section-title h1">WARDS</h5>
+        <span><a *ngIf="isAdmin" routerLink="/addroom"><i class="far fa-plus-square">Add Room</i></a> <a *ngIf="isAdmin" routerLink="/usermanage"><i class="fas fa-users-cog">User Management</i></a></span>
+        <br/><br/>
+        <div class="row">
+            <room *ngFor="let r of rooms" [room]="r" ></room>
+        </div>
+    </div>
+</section>

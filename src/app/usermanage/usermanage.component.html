@@ -1,0 +1,38 @@
+<div class="container">
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th scope="col"></th>
+        <th scope="col">UserName</th>
+        <th scope="col">Approved</th>
+        <th scope="col">Block</th>
+        <th scope="col">Delete</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of users">
+        <td><i class="fas fa-user-md fa-lg"></i></td>
+        <td>{{user.username}}</td>
+        <td>
+            <a href="javascript:void(0);" *ngIf="user.isApproved" (click)="approveUser(user,false);">
+                <i class="fas fa-check-double fa-lg"></i>
+            </a>
+          </td>
+        <td>
+          <a href="javascript:void(0);" *ngIf="!user.isApproved" (click)="approveUser(user,true);">
+              <i class="fas fa-ban fa-lg"></i>
+          </a>
+        </td>        
+        <td>
+          <a href="javascript:void(0);" (click)="deleteUser(user);">
+            <i class="far fa-trash-alt fa-lg"></i>
+          </a>
+        </td>
+      
+      </tr>
+    </tbody>
+  </table>
+  <div class="form-group">
+  <a *ngIf="users"  routerLink="/dashboard"><button type="button" class="btn btn-primary">back</button></a>
+  </div>
+</div>
