@@ -1,5 +1,5 @@
 <body id="login-body">
-<div class="container center_div border-0" >
+<div class="container col-lg-4 col-md-6  center_div shadow p-3 mb-5 bg-white rounded" >
   <!-- Login Form-->
   <form *ngIf=" mode=='login' " #loginForm="ngForm"   (ngSubmit)="login()">
     <div class="form-group">
@@ -9,7 +9,7 @@
     <div class="form-group">
       <label for="password">Password:</label>
       <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password">
-    </div>
+    </div> 
     
     <button type="submit" class="btn btn-primary">Submit</button>
     <span >New User <a (click)="toggleMode('register');" href="javascript:void(0);">click here</a></span>
