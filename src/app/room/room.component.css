@@ -1,8 +1,4 @@
 /* You can add global styles to this file, and also import other style files */
-#team {
-    background: #eee !important;
-}
-
 
 section {
     padding: 60px 0;
@@ -16,11 +12,7 @@ section .section-title {
 
 #team .card {
     border: none;
-    background: #ffffff;
 }
-
-
-
 
 .frontside {
     position: relative;

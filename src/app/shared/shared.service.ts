@@ -28,7 +28,6 @@ export class SharedService {
   addRoom(room: object): Observable<any> {
     var id = Math.floor(Math.random() * 10000) + 1;
     return new Observable((observer) => {
-      console.log('room in service:' + JSON.stringify(room))
       room['id'] = id + room['roomNo'];
       this.ref.firestore.collection('room').doc('' + id).set(room).then((rm) => {
         observer.next(rm);
@@ -37,7 +36,7 @@ export class SharedService {
   }
 
   getUsers = new Observable<Array<object>>(observer => {
-    this.ref.firestore.collection('users').get().then(QuerySnapshot=>{
+    this.ref.firestore.collection('users').get().then(QuerySnapshot => {
       let users: Array<object> = [];
       QuerySnapshot.docs.forEach(r => {
         var obj = r.data();
@@ -51,7 +50,6 @@ export class SharedService {
   doCheckIn(room: Room, isChekIn: boolean): Observable<any> {
     return new Observable((observer) => {
       var user = localStorage.getItem('user').toString();
-      console.log('room id:' + room.id)
       if (isChekIn) {
         room.currentlyOptedIn = user;
         room.optedInTime = new Date().toString();
@@ -83,7 +81,6 @@ export class SharedService {
     } else {
       user.isApproved = false;
     }
-    console.log('selectd user:'+JSON.stringify(user))
     return new Observable((observer) => {
       this.ref.firestore.collection('users').doc(user.id).set(user)
         .then(res => {
@@ -92,9 +89,22 @@ export class SharedService {
     })
   }
 
-  addUser(user:User):Observable<any>{
-    return new Observable((observer)=>{
-      this.ref.firestore.collection('users').add(user).then(res=>{
+  isUserAlreadyCheckedIn(user: string, isCheckIn: boolean): Observable<boolean> {
+    return new Observable((observer) => {
+      if (!isCheckIn) {
+        observer.next(false);
+      } else {
+        this.ref.firestore.collection('room').where("currentlyOptedIn", "==", user.trim())
+          .get().then((res) => {
+            observer.next(res != null && res.docs.length > 0);
+          })
+      }
+    })
+  }
+
+  addUser(user: User): Observable<any> {
+    return new Observable((observer) => {
+      this.ref.firestore.collection('users').add(user).then(res => {
         observer.next(true);
       })
     })
@@ -111,7 +121,6 @@ export class SharedService {
 
   isAdmin() {
     var admin = sessionStorage['isAdmin'];
-    console.log('am in isAdmin:'+admin)
     return admin == "true";
   }
 

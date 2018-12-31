@@ -2,7 +2,10 @@
   <div class="frontside">
     <div class="card">
       <div class="card-body text-center">
-        <p><img class=" img-fluid" src="/assets/icon/room-icon.ico" alt="card image"></p>
+        <p>
+          <img *ngIf="room.isDoctorIn" class=" img-fluid" src="/assets/icon/doctor.png" alt="card image">
+          <img *ngIf="!room.isDoctorIn" class=" img-fluid" src="/assets/icon/doctor-blank.png" alt="card image">
+        </p>
         <h4 class="card-title">{{room.roomName}}</h4>
         <p *ngIf="room.isDoctorIn" class="card-text">checked in <b>{{room.currentlyOptedIn}}</b> </p>
         <p *ngIf="!room.isDoctorIn" class="card-text">ward is empty</p>

@@ -10,6 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { SharedService } from './shared/shared.service';
 import { LoginRouteGuard } from './login/login.router.guard';
 import { UsermanageComponent } from './usermanage/usermanage.component';
+import { MatSnackBarModule } from '@angular/material';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -25,9 +27,10 @@ import { UsermanageComponent } from './usermanage/usermanage.component';
     BrowserModule,
     FormsModule,
     AppRoutingModule,
-
+    MatSnackBarModule,
+    BrowserAnimationsModule
   ],
-  providers: [SharedService,LoginRouteGuard],
+  providers: [SharedService, LoginRouteGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

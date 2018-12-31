@@ -19,13 +19,12 @@ export class UsermanageComponent implements OnInit {
   }
 
   approveUser(user: User, status: boolean) {
-    console.log('selected user:' + JSON.stringify(user))
     this.service.approveUser(user, status).subscribe(res => {
     })
   }
 
-  deleteUser(user:User){
-    
+  deleteUser(user: User) {
+
   }
 
 }

@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { SharedService } from '../shared/shared.service'
-import {Router} from '@angular/router';
-import * as firebase from 'firebase';
-import firestore from 'firebase/firestore';
-import { config } from 'rxjs';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-dashboard',
@@ -13,11 +11,11 @@ import { config } from 'rxjs';
 export class DashboardComponent implements OnInit {
   public rooms: Object[];
 
-  loggesInUser:string;
-  isAdmin:boolean;
-  constructor(private service: SharedService ,private router:Router) {
-    
-   }
+  loggesInUser: string;
+  isAdmin: boolean;
+  constructor(private service: SharedService, private router: Router) {
+
+  }
 
   ngOnInit() {
     this.service.getRooms
@@ -26,11 +24,11 @@ export class DashboardComponent implements OnInit {
           this.rooms = rooms;
         }
       });
-      this.loggesInUser = this.service.getLoggedInUsername();
-      this.isAdmin =this.service.isAdmin();
+    this.loggesInUser = this.service.getLoggedInUsername();
+    this.isAdmin = this.service.isAdmin();
   }
 
-  logout(){
+  logout() {
     sessionStorage.clear();
     this.router.navigate(['/login']);
   }

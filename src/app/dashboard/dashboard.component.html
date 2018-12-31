@@ -1,11 +1,12 @@
-<div style="float:right;margin: 20px;">
-    <span>Logged in as </span> <b>{{loggesInUser}}</b>
-    <span><a href="javascript:void(0);" (click)="logout();">Logout</a></span>
+<div style="float:right;">
+    <span style="color: white;padding: 54px;">Logged in as <b>{{loggesInUser}}</b></span>
+    <span style="padding: 6px;display: inherit;margin-left: 103px;"><a href="javascript:void(0);" (click)="logout();">Logout</a></span>
 </div>
+
 <section id="team" class="pb-5">
-    <div class="container">
-        <h5 class="section-title h1">WARDS</h5>
-        <span><a *ngIf="isAdmin" routerLink="/addroom"><i class="far fa-plus-square">Add Room</i></a> <a *ngIf="isAdmin" routerLink="/usermanage"><i class="fas fa-users-cog">User Management</i></a></span>
+    <div class="container" style="background-color: black;">
+        <h5 class="section-title h1" style="color: white;">WARDS</h5>
+        <span><a *ngIf="isAdmin" style="color: white;" routerLink="/addroom"><i class="far fa-plus-square">Add Room</i></a> <a *ngIf="isAdmin" style="margin-left: 10px;color: white;" routerLink="/usermanage"><i class="fas fa-users-cog">User Management</i></a></span>
         <br/><br/>
         <div class="row">
             <room *ngFor="let r of rooms" [room]="r" ></room>
