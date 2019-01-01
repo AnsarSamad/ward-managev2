@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
   login() {
     this.service.getUsers.subscribe((res) => {
       res.forEach((element: User) => {
-        if (element.username == this.user.username && element.password == this.user.password) {
+        if (element.username.toUpperCase() == this.user.username.toUpperCase() && element.password.toUpperCase() == this.user.password.toUpperCase()) {
           if (element.isApproved) {
             sessionStorage.setItem('user', element.username.toString());
             sessionStorage.setItem('isAdmin', '' + element.isAdmin);
