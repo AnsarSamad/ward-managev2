@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, observable } from 'rxjs';
-import * as firebase from 'firebase';
+import * as firebase from 'firebase/app';
+import 'firebase/firestore';
 import { Room } from '../room/Room';
 import { User } from '../login/User';
 
