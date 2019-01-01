@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Room } from './Room';
 import { Router } from '@angular/router'
 import { SharedService } from '../shared/shared.service';
@@ -10,11 +10,17 @@ import { MatSnackBar } from '@angular/material';
   templateUrl: './room.component.html',
   styleUrls: ['./room.component.css']
 })
-export class RoomComponent {
+export class RoomComponent implements OnInit {
   //private rooms = null;
   @Input() room: Room;
+  isAdmin: boolean;
+  currentlyLoggesIn:string;
   constructor(private service: SharedService, private router: Router, public snackBar: MatSnackBar) { }
 
+  ngOnInit() {
+    this.isAdmin = this.service.isAdmin();
+    this.currentlyLoggesIn = this.service.getLoggedInUsername();
+  }
 
   getCount() {
     return new Array(25);
@@ -25,16 +31,16 @@ export class RoomComponent {
     this.service.isUserAlreadyCheckedIn(user, status)
       .subscribe((isAlreadyCheckedIn) => {
         if (isAlreadyCheckedIn) {
-          this.openSnackBar('User is already checked in','Already Checked In');
+          this.openSnackBar('User is already checked in', 'Already Checked In');
         } else {
           this.service.doCheckIn(room, status).subscribe(res => {
             if (!status && !this.service.isAdmin()) {
               sessionStorage.removeItem('user');
               sessionStorage.removeItem('isAdmin');
-              this.openSnackBar(status? "User Checked In" : "User Checked Out Successfully", 'Checked Out');
+              this.openSnackBar(status ? "User Checked In" : "User Checked Out Successfully", 'Checked Out');
               this.router.navigate(['login']);
             } else {
-              this.openSnackBar(status? "User Checked In Successfully" : "User Checked Out Successfully", status? 'Checked In':'Checked Out');
+              this.openSnackBar(status ? "User Checked In Successfully" : "User Checked Out Successfully", status ? 'Checked In' : 'Checked Out');
             }
           })
         }

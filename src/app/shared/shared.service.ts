@@ -49,7 +49,7 @@ export class SharedService {
 
   doCheckIn(room: Room, isChekIn: boolean): Observable<any> {
     return new Observable((observer) => {
-      var user = localStorage.getItem('user').toString();
+      var user = sessionStorage.getItem('user').toString();
       if (isChekIn) {
         room.currentlyOptedIn = user;
         room.optedInTime = new Date().toString();

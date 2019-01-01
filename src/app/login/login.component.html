@@ -12,7 +12,7 @@
     </div> 
     
     <button type="submit" class="btn btn-primary">Submit</button>
-    <span >New User <a (click)="toggleMode('register');" href="javascript:void(0);">click here</a></span>
+    <span style="padding:7px;" >New User <a (click)="toggleMode('register');" href="javascript:void(0);">click here</a></span>
   </form>
   <!-- Registration form-->
   <form *ngIf=" mode=='register' " #registerForm="ngForm"  (ngSubmit)="register()">
@@ -30,7 +30,7 @@
         </div>
         
       <button type="submit" class="btn btn-primary">Submit</button>
-      <span >Already registered <a (click)="toggleMode('login');" href="javascript:void(0);">click here</a></span>
+      <span style="padding: 7px;">Already registered <a (click)="toggleMode('login');" href="javascript:void(0);">click here</a></span>
     </form>
   </div>
   </body>

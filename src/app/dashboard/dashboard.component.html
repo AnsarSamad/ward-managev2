@@ -6,7 +6,7 @@
 <section id="team" class="pb-5">
     <div class="container" style="background-color: black;">
         <h5 class="section-title h1" style="color: white;">WARDS</h5>
-        <span><a *ngIf="isAdmin" style="color: white;" routerLink="/addroom"><i class="far fa-plus-square">Add Room</i></a> <a *ngIf="isAdmin" style="margin-left: 10px;color: white;" routerLink="/usermanage"><i class="fas fa-users-cog">User Management</i></a></span>
+        <span><a *ngIf="isAdmin" style="color: white;" routerLink="/addroom"><i class="far fa-plus-square">Add Ward</i></a> <a *ngIf="isAdmin" style="margin-left: 10px;color: white;" routerLink="/usermanage"><i class="fas fa-users-cog">User Management</i></a></span>
         <br/><br/>
         <div class="row">
             <room *ngFor="let r of rooms" [room]="r" ></room>

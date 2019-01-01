@@ -1,11 +1,11 @@
-<div class="container">
+<div class="container col-lg-4 col-md-6  center_div shadow p-3 mb-5 bg-white rounded">
 <form #roomForm="ngForm"  (ngSubmit)="addRoom()">
   <div class="form-group">
-    <label for="roomNo">Room No:</label>
+    <label for="roomNo">Ward No:</label>
     <input type="roomNo" class="form-control" id="roomNo"  name="roomNo" [(ngModel)]="room.roomNo">
   </div>
   <div class="form-group">
-    <label for="roomName">RoomName:</label>
+    <label for="roomName">Ward Name:</label>
     <input type="roomName" class="form-control" id="roomName" name="roomName" [(ngModel)]="room.roomName">
   </div>
   <div class="form-group">

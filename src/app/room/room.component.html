@@ -9,9 +9,9 @@
         <h4 class="card-title">{{room.roomName}}</h4>
         <p *ngIf="room.isDoctorIn" class="card-text">checked in <b>{{room.currentlyOptedIn}}</b> </p>
         <p *ngIf="!room.isDoctorIn" class="card-text">ward is empty</p>
-        <button *ngIf="room.isDoctorIn" (click)="doCheckIn(room,false)" class="button btn-warning btn-sm">Check OUT</button>
+        <button *ngIf="room.isDoctorIn && (isAdmin || room.currentlyOptedIn == currentlyLoggesIn)" (click)="doCheckIn(room,false)" class="button btn-warning btn-sm">Check OUT</button>
         <button *ngIf="!room.isDoctorIn" (click)="doCheckIn(room,true)" class="button btn-primary btn-sm">Check IN</button>
-        <button (click)="deleteRoom(room.id)" class="button btn-default btn-sm">Delete</button>
+        <button *ngIf="isAdmin" (click)="deleteRoom(room.id)" class="button btn-default btn-sm">Delete</button>
       </div>
     </div>
   </div>
