@@ -4,6 +4,7 @@ import * as firebase from 'firebase/app';
 import 'firebase/firestore';
 import { Room } from '../room/Room';
 import { User } from '../login/User';
+import { DatePipe } from '@angular/common'
 
 @Injectable({
   providedIn: 'root'
@@ -11,7 +12,7 @@ import { User } from '../login/User';
 export class SharedService {
 
   ref = firebase.firestore().collection('room');
-  constructor() {
+  constructor(public datePipe:DatePipe) {
   }
 
   getRooms = new Observable(observer => {
@@ -51,20 +52,45 @@ export class SharedService {
   doCheckIn(room: Room, isChekIn: boolean): Observable<any> {
     return new Observable((observer) => {
       var user = sessionStorage.getItem('user').toString();
+      var optedInTime = null;
       if (isChekIn) {
         room.currentlyOptedIn = user;
-        room.optedInTime = new Date().toString();
+        room.optedInTime = this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss');
         room.isDoctorIn = true;
       } else {
+        optedInTime = room.optedInTime;
         room.currentlyOptedIn = '';
         room.optedInTime = ''
         room.isDoctorIn = false;
       }
       this.ref.firestore.collection('room').doc(room.id).set(room).then(res => {
-        observer.next(res);
+        if (!isChekIn) { // add to history while check out
+          this.addHistory(room.roomNo, optedInTime)
+            .then((status) => {
+              observer.next(res);
+            });
+        } else {
+          observer.next(res);
+        }
+
       })
     });
+  }
 
+  addHistory(roomNo: string, OptedIn: string) {
+    var history = {
+      "optedOut":  this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss'),
+      "optedIn": OptedIn,
+      "roomNo": roomNo,
+      "timeSpend":'15',
+      "userid": this.getLoggedInUsername()
+    };
+    return new Promise((resolve, reject) => {
+      this.ref.firestore.collection('history').add(history)
+        .then((res) => {
+          resolve(true);
+        })
+    })
   }
 
   deleteRoom(roomId: string): Observable<any> {
@@ -103,6 +129,25 @@ export class SharedService {
     })
   }
 
+  getHistory():Observable<any>{
+    return new Observable((observer)=>{
+      this.ref.firestore.collection('history').onSnapshot((snap)=>{
+        let history: Array<object> = [];
+        snap.docs.forEach(hist=>{
+          history.push(hist.data());
+        })
+        console.log('history data:'+JSON.stringify(history))
+        var sortedHistory: Array<Object> = history.sort((obj1, obj2) => {
+          const opt1 = obj1['optedIn'].toLowerCase();
+          const opt2 = obj2['optedIn'].toLowerCase();
+          if (opt1 > opt2) { return -1; }
+          if (opt1 < opt2) { return 1; }
+          return 0;
+        })
+        observer.next(sortedHistory);
+      })
+    })
+  }
   addUser(user: User): Observable<any> {
     return new Observable((observer) => {
       this.ref.firestore.collection('users').add(user).then(res => {

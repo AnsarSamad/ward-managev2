@@ -1,0 +1,31 @@
+<div class="container">
+<input
+type='text'
+style='padding:8px;margin:15px auto;width:30%;'
+placeholder='Type to filter the name column...'
+(keyup)='updateFilter($event)'
+/>
+<ngx-datatable
+#table
+class='material striped'
+
+[columnMode]="'force'"
+[headerHeight]="50"
+[footerHeight]="50"
+[rowHeight]="'auto'"
+[limit]="10"
+[rows]='rows'>
+
+<ngx-datatable-column name="User ID" prop="userid" ></ngx-datatable-column>
+<ngx-datatable-column name="Room No" prop="roomNo" ></ngx-datatable-column>
+<ngx-datatable-column name="Time In" prop="optedIn" ></ngx-datatable-column>
+<ngx-datatable-column name="Time Out" prop="optedOut" ></ngx-datatable-column>
+<ngx-datatable-column name="Time Spend" prop="timeSpend" ></ngx-datatable-column>
+
+</ngx-datatable>
+<br/>
+<div class="form-group">
+    <a  routerLink="/dashboard"><button type="button" class="btn btn-primary">back</button></a>
+    </div>
+
+</div>

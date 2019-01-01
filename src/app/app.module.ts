@@ -12,6 +12,9 @@ import { LoginRouteGuard } from './login/login.router.guard';
 import { UsermanageComponent } from './usermanage/usermanage.component';
 import { MatSnackBarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HistoryComponent } from './history/history.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable'
+import { DatePipe } from '@angular/common'
 
 @NgModule({
   declarations: [
@@ -21,6 +24,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     AddRoomComponent,
     LoginComponent,
     UsermanageComponent,
+    HistoryComponent,
 
   ],
   imports: [
@@ -28,9 +32,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     FormsModule,
     AppRoutingModule,
     MatSnackBarModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    NgxDatatableModule
   ],
-  providers: [SharedService, LoginRouteGuard],
+  providers: [SharedService, LoginRouteGuard,DatePipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
