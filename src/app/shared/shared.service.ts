@@ -12,7 +12,7 @@ import { DatePipe } from '@angular/common'
 export class SharedService {
 
   ref = firebase.firestore().collection('room');
-  constructor(public datePipe:DatePipe) {
+  constructor(public datePipe: DatePipe) {
   }
 
   getRooms = new Observable(observer => {
@@ -37,15 +37,32 @@ export class SharedService {
     });
   }
 
+  validate(username:string,password:string):Observable<any>{
+    return new Observable((observer)=>{
+      this.ref.firestore.collection('users')
+      .where("username","==",username)
+      .where("password","==",password)
+      .get()
+      .then(res=>{
+        if(res.docs.length ==1){
+          observer.next(res.docs[0].data());
+        }else{
+          observer.next(false);
+        }
+      
+      })
+    })
+  }
+
   getUsers = new Observable<Array<object>>(observer => {
-    this.ref.firestore.collection('users').get().then(QuerySnapshot => {
+    this.ref.firestore.collection('users').onSnapshot((QuerySnapshot) => {
       let users: Array<object> = [];
       QuerySnapshot.docs.forEach(r => {
         var obj = r.data();
         obj.id = r.id;
         users.push(obj);
       })
-      observer.next(users)
+      observer.next(users);
     })
   })
 
@@ -79,10 +96,10 @@ export class SharedService {
 
   addHistory(roomNo: string, OptedIn: string) {
     var history = {
-      "optedOut":  this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss'),
+      "optedOut": this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss'),
       "optedIn": OptedIn,
       "roomNo": roomNo,
-      "timeSpend":'15',
+      "timeSpend": '15',
       "userid": this.getLoggedInUsername()
     };
     return new Promise((resolve, reject) => {
@@ -129,14 +146,14 @@ export class SharedService {
     })
   }
 
-  getHistory():Observable<any>{
-    return new Observable((observer)=>{
-      this.ref.firestore.collection('history').onSnapshot((snap)=>{
+  getHistory(): Observable<any> {
+    return new Observable((observer) => {
+      this.ref.firestore.collection('history').onSnapshot((snap) => {
         let history: Array<object> = [];
-        snap.docs.forEach(hist=>{
+        snap.docs.forEach(hist => {
           history.push(hist.data());
         })
-        console.log('history data:'+JSON.stringify(history))
+        console.log('history data:' + JSON.stringify(history))
         var sortedHistory: Array<Object> = history.sort((obj1, obj2) => {
           const opt1 = obj1['optedIn'].toLowerCase();
           const opt2 = obj2['optedIn'].toLowerCase();
@@ -155,6 +172,14 @@ export class SharedService {
       })
     })
   }
+  deleteUser(user: User): Observable<boolean> {
+    return new Observable((observer) => {
+      this.ref.firestore.collection('users').doc(user.id).delete()
+        .then(res => {
+          observer.next(true);
+        })
+    })
+  }
   isLoggedIn() {
     var user = sessionStorage.getItem('user');
     return typeof user != 'undefined' && user != null;
@@ -169,6 +194,5 @@ export class SharedService {
     var admin = sessionStorage['isAdmin'];
     return admin == "true";
   }
-
 
 }

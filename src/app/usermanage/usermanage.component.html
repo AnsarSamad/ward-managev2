@@ -24,7 +24,7 @@
           </a>
         </td>        
         <td>
-          <a href="javascript:void(0);" (click)="deleteUser(user);">
+          <a *ngIf="!user.isAdmin" href="javascript:void(0);" (click)="deleteUser(user);">
             <i class="far fa-trash-alt fa-lg"></i>
           </a>
         </td>

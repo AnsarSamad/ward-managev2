@@ -24,7 +24,9 @@ export class UsermanageComponent implements OnInit {
   }
 
   deleteUser(user: User) {
-
+    this.service.deleteUser(user).subscribe((res)=>{
+      
+    })
   }
 
 }
