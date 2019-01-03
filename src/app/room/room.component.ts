@@ -38,7 +38,7 @@ export class RoomComponent implements OnInit {
               sessionStorage.removeItem('user');
               sessionStorage.removeItem('isAdmin');
               this.openSnackBar(status ? "User Checked In" : "User Checked Out Successfully", 'Checked Out');
-              this.router.navigate(['login']);
+             // this.router.navigate(['login']);
             } else {
               this.openSnackBar(status ? "User Checked In Successfully" : "User Checked Out Successfully", status ? 'Checked In' : 'Checked Out');
             }

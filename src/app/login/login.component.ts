@@ -25,9 +25,14 @@ export class LoginComponent implements OnInit {
     this.service.validate(this.user.username, this.user.password)
       .subscribe((res) => {
         if (res != null && res != false) {
-          sessionStorage.setItem('user', res.username.toString());
-          sessionStorage.setItem('isAdmin', '' + res.isAdmin);
-          this.router.navigate(['/dashboard']);
+          if (!res.isApproved) {
+            this.openSnackBar('User not approved yet, Please contact admin', 'Waiting for approval');
+          } else {
+            sessionStorage.setItem('user', res.username.toString());
+            sessionStorage.setItem('isAdmin', '' + res.isAdmin);
+            this.router.navigate(['/dashboard']);
+          }
+
         } else {
           this.openSnackBar('Invalid User, Please try again', 'Invalid');
         }
@@ -40,7 +45,7 @@ export class LoginComponent implements OnInit {
         this.mode = "login";
         this.reset();
         this.router.navigate(['/login']);
-        this.openSnackBarv2('User added successfully, You will be able to login only after admin approve you ', 'Waiting for approval',4000);
+        this.openSnackBarv2('User added successfully, You will be able to login only after admin approve you ', 'Waiting for approval', 4000);
       })
     } else {
       this.openSnackBar('Password and Confirm password does not match', 'Password Mismatch')
@@ -59,7 +64,7 @@ export class LoginComponent implements OnInit {
       isAdmin: false
     }
   }
-  openSnackBarv2(message: string, action: string,duration:number) {
+  openSnackBarv2(message: string, action: string, duration: number) {
     this.snackbar.open(message, action, {
       duration: duration,
     });
