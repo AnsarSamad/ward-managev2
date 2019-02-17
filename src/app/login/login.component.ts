@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.service.validate(this.user.username, this.user.password)
+    if(this.user.username.length > 0 && this.user.password.length >0){
+      this.service.validate(this.user.username, this.user.password)
       .subscribe((res) => {
         if (res != null && res != false) {
           if (!res.isApproved) {
@@ -37,19 +38,28 @@ export class LoginComponent implements OnInit {
           this.openSnackBar('Invalid User, Please try again', 'Invalid');
         }
       })
+    }else{
+      this.openSnackBar('Invalid Username or Password, Please try again', 'Invalid');
+    }
+    
   }
 
   register() {
-    if (this.user.password == this.confirmpassword) {
-      this.service.addUser(this.user).subscribe(res => {
-        this.mode = "login";
-        this.reset();
-        this.router.navigate(['/login']);
-        this.openSnackBarv2('User added successfully, You will be able to login only after admin approve you ', 'Waiting for approval', 4000);
-      })
-    } else {
-      this.openSnackBar('Password and Confirm password does not match', 'Password Mismatch')
+    if(this.user.username.length > 0 && this.user.password.length >0 && this.confirmpassword.length >0){
+      if (this.user.password == this.confirmpassword) {
+        this.service.addUser(this.user).subscribe(res => {
+          this.mode = "login";
+          this.reset();
+          this.router.navigate(['/login']);
+          this.openSnackBarv2('User added successfully, You will be able to login only after admin approve you ', 'Waiting for approval', 4000);
+        })
+      } else {
+        this.openSnackBar('Password and Confirm password does not match', 'Password Mismatch')
+      }
+    }else{
+      this.openSnackBar('Invalid Username or Password ,Please try again', 'Password Mismatch')
     }
+    
   }
 
   toggleMode(mode: string) {
