@@ -1,4 +1,2 @@
-.center_div{
-    margin-top: 140px;
-    width:72% /* value of your choice which suits your alignment */
-}
+@import '../../assets/css/iofrm-style.css';
+@import '../../assets/css/iofrm-theme4.css';

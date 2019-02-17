@@ -95,11 +95,19 @@ export class SharedService {
   }
 
   addHistory(roomNo: string, OptedIn: string) {
+    var optedInDate = new Date(OptedIn);
+    var OptedOutDate = new Date();
+    var diff = OptedOutDate.getSeconds() - optedInDate.getSeconds();
+    var timeSpendInMinute = Math.round(diff/60);
+    if(timeSpendInMinute < 1){
+      timeSpendInMinute = 1;
+    }
+    console.log('timeSpendInMinute:'+timeSpendInMinute);
     var history = {
-      "optedOut": this.datePipe.transform(new Date(), 'yyyy-MM-dd HH:mm:ss'),
+      "optedOut": this.datePipe.transform(OptedOutDate, 'yyyy-MM-dd HH:mm:ss'),
       "optedIn": OptedIn,
       "roomNo": roomNo,
-      "timeSpend": '15',
+      "timeSpend": timeSpendInMinute,
       "userid": this.getLoggedInUsername()
     };
     return new Promise((resolve, reject) => {

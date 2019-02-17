@@ -1,36 +1,40 @@
-<body id="login-body">
-<div class="container col-lg-4 col-md-6  center_div shadow p-3 mb-5 bg-white rounded" >
-  <!-- Login Form-->
-  <form *ngIf=" mode=='login' " #loginForm="ngForm"   (ngSubmit)="login()">
-    <div class="form-group">
-      <label for="username">User Name:</label>
-      <input type="roomNo" class="form-control" id="username"  name="username" [(ngModel)]="user.username">
-    </div>
-    <div class="form-group">
-      <label for="password">Password:</label>
-      <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password">
-    </div> 
-    
-    <button type="submit" class="btn btn-primary">Submit</button>
-    <span style="padding:7px;" >New User <a (click)="toggleMode('register');" href="javascript:void(0);">click here</a></span>
-  </form>
-  <!-- Registration form-->
-  <form *ngIf=" mode=='register' " #registerForm="ngForm"  (ngSubmit)="register()">
-      <div class="form-group">
-        <label for="username">User Name:</label>
-        <input type="roomNo" class="form-control" id="username"  name="username" [(ngModel)]="user.username">
-      </div>
-      <div class="form-group">
-        <label for="password">Password:</label>
-        <input type="password" class="form-control" id="password" name="password" [(ngModel)]="user.password">
-      </div>
-      <div class="form-group">
-          <label for="confirmpassword">Confirm Password:</label>
-          <input type="password" class="form-control" id="confirmpassword" name="confirmpassword" [(ngModel)]="confirmpassword">
+<div class="form-body" class="container-fluid">
+
+  <div class="row">
+     <div class="img-holder">
+        <div class="bg"></div>
+        <div class="info-holder">
+           <img src="../../assets/images/login-wall.jpg" alt="">
         </div>
-        
-      <button type="submit" class="btn btn-primary">Submit</button>
-      <span style="padding: 7px;">Already registered <a (click)="toggleMode('login');" href="javascript:void(0);">click here</a></span>
-    </form>
+     </div>
+     <div class="form-holder">
+        <div class="form-content">
+           <div class="form-items">
+              <h3>Ward Management System</h3>
+              
+              <div class="page-links">
+                 <a (click)="toggleMode('login');" href="javascript:void(0);" class="active">Login</a><a (click)="toggleMode('register');" href="javascript:void(0);">Register</a>
+              </div>
+    
+              <form *ngIf=" mode=='login' " #loginForm="ngForm"   (ngSubmit)="login()">
+                  <input type="roomNo" class="form-control" id="username" type="text" placeholder="Username" name="username" [(ngModel)]="user.username">
+                  <input type="password" class="form-control" id="password" placeholder="Password" type="password" name="password" [(ngModel)]="user.password">
+                  <div class="form-button">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+              </form>
+              
+              <form *ngIf=" mode=='register' " #registerForm="ngForm"  (ngSubmit)="register()">
+                  <input type="text" class="form-control" id="username" placeholder="Username" name="username" [(ngModel)]="user.username">
+                  <input type="password" class="form-control" id="password" placeholder="Password" name="password" [(ngModel)]="user.password">
+                  <input type="password" class="form-control" id="confirmpassword" placeholder="Confirm password" name="confirmpassword" [(ngModel)]="confirmpassword">
+                  <div class="form-button">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                  </div>
+              </form>
+             
+           </div>
+        </div>
+     </div>
   </div>
-  </body>
+</div>

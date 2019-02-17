@@ -1,25 +1,29 @@
-<div style="float:right;">
-    <span style="color: white;padding: 54px;">Logged in as <b>{{loggesInUser}}</b></span>
-    <span style="padding: 6px;display: inherit;margin-left: 103px;"><a href="javascript:void(0);" (click)="logout();">Logout</a></span>
-</div>
-
-<section id="team" class="pb-5">
-    <div class="container" style="background-color: black;">
-        <h5 class="section-title h1" style="color: white;">WARDS</h5>
-        <span *ngIf="isAdmin">
-            <a  style="color: white;" routerLink="/addroom">
-                <i class="far fa-plus-square">Add Ward</i>
-            </a>
-             <a  style="margin-left: 10px;color: white;" routerLink="/usermanage">
-                <i class="fas fa-users-cog">User Management</i>
-            </a>
-            <a  style="margin-left: 10px;color: white;" routerLink="/history">
-                <i class="fas fa-history">User History</i>
-            </a>
-        </span>
-        <br/><br/>
-        <div class="row">
-            <room *ngFor="let r of rooms" [room]="r" ></room>
-        </div>
-    </div>
-</section>
+<div class="container">
+        <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #2D2D2D" >
+           <div class="col-md-9" style="color: white">
+              <h5>Ward Management</h5>
+              <div *ngIf="isAdmin">
+                 <a routerLink="/addroom">
+                 <i class="far fa-plus-square"  style="color: white">Add Ward</i>
+                 </a>
+                 <a  style="margin-left: 10px;" routerLink="/usermanage">
+                 <i class="fas fa-users-cog"  style="color: white">User Management</i>
+                 </a>
+                 <a  style="margin-left: 10px;" routerLink="/history">
+                 <i class="fas fa-history"  style="color: white">User History</i>
+                 </a>
+              </div>
+           </div>
+           <div class="col-md-3">
+              <span style="float: right;color: white;">Logged in as <b>{{loggesInUser}}</b></span>
+              <span style="padding: 6px;display: inherit;margin-left: 190px;"><a  style="color: white" href="javascript:void(0);" (click)="logout();">Logout</a></span>
+           </div>
+        </header>
+        <section id="team" style="margin-top: 25px;">
+           <div style="background-color:whitesmoke;">
+              <div class="row">
+                 <room *ngFor="let r of rooms" [room]="r" ></room>
+              </div>
+           </div>
+        </section>
+     </div>
