@@ -34,14 +34,7 @@ export class RoomComponent implements OnInit {
           this.openSnackBar('User is already checked in', 'Already Checked In');
         } else {
           this.service.doCheckIn(room, status).subscribe(res => {
-            if (!status && !this.service.isAdmin()) {
-              sessionStorage.removeItem('user');
-              sessionStorage.removeItem('isAdmin');
-              this.openSnackBar(status ? "User Checked In" : "User Checked Out Successfully", 'Checked Out');
-             // this.router.navigate(['login']);
-            } else {
-              this.openSnackBar(status ? "User Checked In Successfully" : "User Checked Out Successfully", status ? 'Checked In' : 'Checked Out');
-            }
+            this.openSnackBar(status ? "User Checked In Successfully" : "User Checked Out Successfully", status ? 'Checked In' : 'Checked Out');
           })
         }
       })
