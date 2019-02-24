@@ -1,19 +1,18 @@
-<div class="container col-lg-4 col-md-6  center_div shadow p-3 mb-5 bg-white rounded">
-<form #roomForm="ngForm"  (ngSubmit)="addRoom()">
-  <div class="form-group">
-    <label for="roomNo">Ward No:</label>
-    <input type="roomNo" class="form-control" id="roomNo"  name="roomNo" [(ngModel)]="room.roomNo">
+
+<div class="container col-lg-4 col-md-8  center_div shadow p-3 mb-5 bg-white rounded">
+  <div class="form-content">
+     <div class="form-items">
+        <h3>Add New Ward</h3>       
+        <form  #roomForm="ngForm"  (ngSubmit)="addRoom()">
+            <input type="text" class="form-control" required type="text" placeholder="Enter Ward Number" id="roomNo"  name="roomNo" [(ngModel)]="room.roomNo">
+            <input type="text" class="form-control" required placeholder="Enter Ward Name" type="text" id="roomName"  name="roomName" [(ngModel)]="room.roomName">
+            <input type="text" class="form-control" required placeholder="Enter Ward Desc" type="text" id="desc" name="desc" [(ngModel)]="room.desc">
+            <div class="form-button">
+              <button type="submit" class="btn btn-primary btn-sm">Submit</button>
+              <a  routerLink="/dashboard"><button type="button" class="btn btn-default btn-sm">Back</button></a>
+            </div>
+        </form>
+    </div>
   </div>
-  <div class="form-group">
-    <label for="roomName">Ward Name:</label>
-    <input type="roomName" class="form-control" id="roomName" name="roomName" [(ngModel)]="room.roomName">
-  </div>
-  <div class="form-group">
-    <label for="desc">Desc:</label>
-    <input type="roomName" class="form-control" id="desc" name="desc" [(ngModel)]="room.desc">
-  </div>
-  
-  <button type="submit" class="btn btn-primary">Submit</button>
-  <a style="margin-left:20px;" routerLink="/dashboard"><button type="button" class="btn btn-primary">back</button></a>
-</form>
 </div>
+        

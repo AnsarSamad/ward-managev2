@@ -1,32 +1,32 @@
 <div class="container">
-<div class="row">
-  <table class="table table-striped">
-    <thead>
+<div class="col-sm-5 col-sm-offset-2 col-md-12 col-md-offset-2 p-4">
+  <table class="table table-striped" style="width: 100%">
+    <thead class="thead-dark">
       <tr>
         <th scope="col"></th>
         <th scope="col">UserName</th>
         <th scope="col">Approved</th>
-        <th scope="col">Block</th>
+        <th scope="col">Blocked</th>
         <th scope="col">Delete</th>
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let user of users">
-        <td><i class="fas fa-user-md fa-lg"></i></td>
+        <td><i class="fas fa-user-md fa-sm"></i></td>
         <td>{{user.username}}</td>
         <td>
             <a href="javascript:void(0);" *ngIf="user.isApproved" (click)="approveUser(user,false);">
-                <i class="fas fa-check-double fa-lg"></i>
+                <i class="fas fa-check-double fa-sm"></i>
             </a>
           </td>
         <td>
           <a href="javascript:void(0);" *ngIf="!user.isApproved" (click)="approveUser(user,true);">
-              <i class="fas fa-ban fa-lg"></i>
+              <i class="fas fa-ban fa-sm"></i>
           </a>
         </td>        
         <td>
           <a *ngIf="!user.isAdmin" href="javascript:void(0);" (click)="deleteUser(user);">
-            <i class="far fa-trash-alt fa-lg"></i>
+            <i class="far fa-trash-alt fa-sm"></i>
           </a>
         </td>
       
@@ -34,7 +34,7 @@
     </tbody>
   </table>
   <div class="form-group">
-  <a *ngIf="users"  routerLink="/dashboard"><button type="button" class="btn btn-primary">back</button></a>
+  <a *ngIf="users"  routerLink="/dashboard"><button type="button" class="btn btn-primary btn-sm">Back</button></a>
   </div>
 </div>
 

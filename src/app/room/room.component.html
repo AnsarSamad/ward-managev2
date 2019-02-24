@@ -6,8 +6,8 @@
           <img *ngIf="room.isDoctorIn" class=" img-fluid" src="/assets/icon/doctor.png" alt="card image">
           <img *ngIf="!room.isDoctorIn" class=" img-fluid" src="/assets/icon/doctor-blank.png" alt="card image">
         </p>
-        <h4 class="card-title">Ward No {{room.roomName}}</h4>
-        <p *ngIf="room.isDoctorIn" class="card-text">checked in <b>{{room.currentlyOptedIn}}</b> </p>
+        <h4 class="card-title"> {{room.roomName}}</h4>
+        <p *ngIf="room.isDoctorIn" class="card-text">Staff in : <b>{{room.currentlyOptedIn}}</b> </p>
         <p *ngIf="!room.isDoctorIn" class="card-text">ward is empty</p>
         <button *ngIf="room.isDoctorIn && (isAdmin || room.currentlyOptedIn == currentlyLoggesIn)" (click)="doCheckIn(room,false)" class="button btn-warning btn-sm">Check OUT</button>
         <button *ngIf="!room.isDoctorIn" (click)="doCheckIn(room,true)" class="button btn-primary btn-sm">Check IN</button>

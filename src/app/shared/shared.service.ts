@@ -97,12 +97,11 @@ export class SharedService {
   addHistory(roomNo: string, OptedIn: string) {
     var optedInDate = new Date(OptedIn);
     var OptedOutDate = new Date();
-    var diff = OptedOutDate.getSeconds() - optedInDate.getSeconds();
-    var timeSpendInMinute = Math.round(diff/60);
+    var diff = OptedOutDate.getTime() - optedInDate.getTime();
+    var timeSpendInMinute = Math.round(diff/60000);
     if(timeSpendInMinute < 1){
       timeSpendInMinute = 1;
     }
-    console.log('timeSpendInMinute:'+timeSpendInMinute);
     var history = {
       "optedOut": this.datePipe.transform(OptedOutDate, 'yyyy-MM-dd HH:mm:ss'),
       "optedIn": OptedIn,
@@ -161,7 +160,6 @@ export class SharedService {
         snap.docs.forEach(hist => {
           history.push(hist.data());
         })
-        console.log('history data:' + JSON.stringify(history))
         var sortedHistory: Array<Object> = history.sort((obj1, obj2) => {
           const opt1 = obj1['optedIn'].toLowerCase();
           const opt2 = obj2['optedIn'].toLowerCase();

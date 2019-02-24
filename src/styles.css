@@ -2,3 +2,5 @@
 @import '~@swimlane/ngx-datatable/release/index.css';
 @import '~@swimlane/ngx-datatable/release/themes/material.css';
 @import '~@swimlane/ngx-datatable/release/assets/icons.css';
+@import './assets/css/iofrm-style.css';
+@import './assets/css/iofrm-theme4.css';
