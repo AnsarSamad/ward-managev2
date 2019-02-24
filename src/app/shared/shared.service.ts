@@ -107,6 +107,7 @@ export class SharedService {
       "optedIn": OptedIn,
       "roomNo": roomNo,
       "timeSpend": timeSpendInMinute,
+      "optedOut-inMillis":OptedOutDate.getTime(),
       "userid": this.getLoggedInUsername()
     };
     return new Promise((resolve, reject) => {
