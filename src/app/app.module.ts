@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { RoomComponent } from './room/room.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { AddRoomComponent } from './add-room/add-room.component';
+import { NavigationComponent } from './header/navigation.component';
 import { LoginComponent } from './login/login.component';
 import { SharedService } from './shared/shared.service';
 import { LoginRouteGuard } from './login/login.router.guard';
@@ -14,7 +15,8 @@ import { MatSnackBarModule } from '@angular/material';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HistoryComponent } from './history/history.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'
-import { DatePipe } from '@angular/common'
+import { DatePipe } from '@angular/common';
+import { RoomlistComponent } from './roomlist/roomlist.component'
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { DatePipe } from '@angular/common'
     LoginComponent,
     UsermanageComponent,
     HistoryComponent,
-
+    NavigationComponent,
+    RoomlistComponent
   ],
   imports: [
     BrowserModule,

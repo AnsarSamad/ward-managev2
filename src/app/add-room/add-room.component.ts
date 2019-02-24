@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router'
 import { Room } from '../room/Room';
 import { SharedService } from '../shared/shared.service';
@@ -9,6 +9,8 @@ import { SharedService } from '../shared/shared.service';
 })
 export class AddRoomComponent implements OnInit {
   room: Room;
+  @Output() gotoHome = new EventEmitter<string>();
+
   constructor(private service: SharedService, private router: Router) {
     this.room = {
       roomNo: '',
@@ -30,4 +32,7 @@ export class AddRoomComponent implements OnInit {
     })
   }
 
+  home(){
+    this.gotoHome.emit('start');
+  }
 }

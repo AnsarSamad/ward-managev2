@@ -1,29 +1,7 @@
 <div class="container">
-        <header class="navbar navbar-expand navbar-dark flex-column flex-md-row bd-navbar" style="background-color: #2D2D2D" >
-           <div class="col-md-9" style="color: white">
-              <h5>Ward Management</h5>
-              <div *ngIf="isAdmin">
-                 <a routerLink="/addroom">
-                 <i class="far fa-plus-square"  style="color: white">Add Ward</i>
-                 </a>
-                 <a  style="margin-left: 10px;" routerLink="/usermanage">
-                 <i class="fas fa-users-cog"  style="color: white">User Management</i>
-                 </a>
-                 <a  style="margin-left: 10px;" routerLink="/history">
-                 <i class="fas fa-history"  style="color: white">User History</i>
-                 </a>
-              </div>
-           </div>
-           <div class="col-md-3">
-              <span style="float: right;color: white;">Logged in as <b>{{loggesInUser}}</b></span>
-              <span style="padding: 6px;display: inherit;margin-left: 190px;"><a  style="color: white" href="javascript:void(0);" (click)="logout();">Logout</a></span>
-           </div>
-        </header>
-        <section id="team" style="margin-top: 25px;">
-           <div style="background-color:whitesmoke;">
-              <div class="row">
-                 <room *ngFor="let r of rooms" [room]="r" ></room>
-              </div>
-           </div>
-        </section>
-     </div>
+   <nav-header [isAdmin]="isAdmin" [loggesInUser]="loggesInUser" (navigation)="navigateTo($event)"></nav-header>
+   <roomlist *ngIf="mode == 'start'" [rooms]="rooms"></roomlist>
+   <add-room *ngIf="mode == 'addward'" (gotoHome)="navigateTo('start')" ></add-room>
+   <usermanage *ngIf="mode == 'user'" (gotoHome)="navigateTo('start')"></usermanage>
+   <history *ngIf="mode == 'history'" (gotoHome)="navigateTo('start')"></history>
+</div>

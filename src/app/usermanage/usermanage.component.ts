@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Output,EventEmitter } from '@angular/core';
 import { User } from '../login/User';
 import { SharedService } from '../shared/shared.service';
 
@@ -10,6 +10,7 @@ import { SharedService } from '../shared/shared.service';
 export class UsermanageComponent implements OnInit {
 
   users: Array<User>;
+  @Output() gotoHome = new EventEmitter<string>();
   constructor(private service: SharedService) { }
 
   ngOnInit() {
@@ -26,7 +27,11 @@ export class UsermanageComponent implements OnInit {
   deleteUser(user: User) {
     this.service.deleteUser(user).subscribe((res)=>{
       
-    })
+    })    
+  }
+
+  home(){
+    this.gotoHome.emit('start');
   }
 
 }

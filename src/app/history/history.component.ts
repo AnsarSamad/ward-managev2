@@ -1,12 +1,13 @@
-import { Component, ViewChild,ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild,ChangeDetectorRef, Output, EventEmitter } from '@angular/core';
 import {SharedService} from '../shared/shared.service';
 
 @Component({
-  selector: 'app-history',
+  selector: 'history',
   templateUrl: './history.component.html',
   styleUrls: ['./history.component.css']
 })
 export class HistoryComponent {
+  @Output() gotoHome = new EventEmitter<string>();
   rows = [];
 
   temp = [];
@@ -31,5 +32,9 @@ export class HistoryComponent {
       return d.userid.toLowerCase().indexOf(val) !== -1 || !val;
     });
     this.rows = temp;
+  }
+
+  home(){
+    this.gotoHome.emit('start');
   }
 }

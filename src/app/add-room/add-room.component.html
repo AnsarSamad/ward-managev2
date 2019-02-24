@@ -1,5 +1,5 @@
 
-<div class="container col-lg-4 col-md-8  center_div shadow p-3 mb-5 bg-white rounded">
+<div class="container col-lg-5 col-md-8  center_div shadow p-3 mb-5 bg-white rounded">
   <div class="form-content">
      <div class="form-items">
         <h3>Add New Ward</h3>       
@@ -9,7 +9,7 @@
             <input type="text" class="form-control" required placeholder="Enter Ward Desc" type="text" id="desc" name="desc" [(ngModel)]="room.desc">
             <div class="form-button">
               <button type="submit" class="btn btn-primary btn-sm">Submit</button>
-              <a  routerLink="/dashboard"><button type="button" class="btn btn-default btn-sm">Back</button></a>
+              <a  href="javascript:void(0);" (click)="home()"><button type="button" class="btn btn-default btn-sm">Back</button></a>
             </div>
         </form>
     </div>

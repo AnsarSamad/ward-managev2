@@ -1,5 +1,8 @@
 .center_div{
-    margin-top: 140px;
+    margin-top: 45px;
     width:72% /* value of your choice which suits your alignment */
+}
+.form-content{
+    max-height: 260px;
 }
 
