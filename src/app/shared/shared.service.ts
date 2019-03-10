@@ -212,7 +212,7 @@ export class SharedService {
       this.auth.createUserWithEmailAndPassword(email,password)     
       .then(res=>{   
         // save the user details in user tables too for user management     
-        this.addUser({'uid':res.user.uid,'email':email,'isAdmin':false,isApproved:false}).subscribe(res=>{
+        this.addUser({'uid':res.user.uid,'username':username,'email':email,'isAdmin':false,isApproved:false}).subscribe(res=>{
           observer.next({'status':true,'user':res.user});
         })
 

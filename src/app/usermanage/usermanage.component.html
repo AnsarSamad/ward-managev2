@@ -5,6 +5,7 @@
       <tr>
         <th scope="col"></th>
         <th scope="col">UserName</th>
+        <th scope="col">Email</th>
         <th scope="col">Approved</th>
         <th scope="col">Blocked</th>
         <th scope="col">Delete</th>
@@ -13,14 +14,15 @@
     <tbody>
       <tr *ngFor="let user of users">
         <td><i class="fas fa-user-md fa-sm"></i></td>
+        <td>{{user.username}}<span *ngIf="user.isAdmin"> <b> (Admin) </b> </span></td>
         <td>{{user.email}}</td>
         <td>
-            <a href="javascript:void(0);" *ngIf="user.isApproved" (click)="approveUser(user,false);">
+            <a href="javascript:void(0);" *ngIf="!user.isAdmin && user.isApproved" (click)="approveUser(user,false);">
                 <i class="fas fa-check-double fa-sm"></i>
             </a>
           </td>
         <td>
-          <a href="javascript:void(0);" *ngIf="!user.isApproved" (click)="approveUser(user,true);">
+          <a href="javascript:void(0);" *ngIf="!user.isAdmin && !user.isApproved" (click)="approveUser(user,true);">
               <i class="fas fa-ban fa-sm"></i>
           </a>
         </td>        
