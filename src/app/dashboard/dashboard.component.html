@@ -1,5 +1,5 @@
 <div class="container">
-   <nav-header [isAdmin]="isAdmin" [loggesInUser]="loggesInUser" (navigation)="navigateTo($event)"></nav-header>
+   <nav-header [isAdmin]="isAdmin" [loggedInUser]="loggedInUser" (navigation)="navigateTo($event)"></nav-header>
    <roomlist *ngIf="mode == 'start'" [rooms]="rooms"></roomlist>
    <add-room *ngIf="mode == 'addward'" (gotoHome)="navigateTo('start')" ></add-room>
    <usermanage *ngIf="mode == 'user'" (gotoHome)="navigateTo('start')"></usermanage>

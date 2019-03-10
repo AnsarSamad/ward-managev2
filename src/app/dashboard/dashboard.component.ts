@@ -11,7 +11,7 @@ import { Router } from '@angular/router';
 export class DashboardComponent implements OnInit {
   public rooms: Object[];
   mode:string;
-  loggesInUser: string;
+  loggedInUser: string;
   isAdmin: boolean;
   constructor(private service: SharedService, private router: Router) {
     this.mode = "start";
@@ -24,7 +24,7 @@ export class DashboardComponent implements OnInit {
           this.rooms = rooms;
         }
       });
-    this.loggesInUser = this.service.getLoggedInUsername();
+    this.loggedInUser = this.service.getLoggedInUsername();
     this.isAdmin = this.service.isAdmin();
   }
 

@@ -7,6 +7,7 @@
            <img src="../../assets/icon/login-wall.jpg" alt="">
         </div>
      </div>
+     
      <div class="form-holder">
         <div class="form-content">
            <div class="form-items">
@@ -17,16 +18,17 @@
               </div>
     
               <form *ngIf=" mode=='login' " #loginForm="ngForm"   (ngSubmit)="login()">
-                  <input type="roomNo" class="form-control" id="username" required type="text" placeholder="Username" name="username" [(ngModel)]="user.username">
-                  <input type="password" class="form-control" id="password" required placeholder="Password" type="password" name="password" [(ngModel)]="user.password">
+                  <input type="roomNo" class="form-control" id="username" required type="text" placeholder="Username" name="username" [(ngModel)]="username">
+                  <input type="password" class="form-control" id="password" required placeholder="Password" type="password" name="password" [(ngModel)]="password">
                   <div class="form-button">
                     <button type="submit" class="btn btn-primary">Submit</button>
                   </div>
               </form>
               
               <form *ngIf=" mode=='register' " #registerForm="ngForm"  (ngSubmit)="register()">
-                  <input type="text" required class="form-control" id="username" placeholder="Username" name="username" [(ngModel)]="user.username">
-                  <input type="password" required class="form-control" id="password" placeholder="Password" name="password" [(ngModel)]="user.password">
+                  <input type="text" required class="form-control" id="username" placeholder="Username" name="username" [(ngModel)]="username">
+                  <input type="text" required class="form-control" id="email" placeholder="Please enter your email" name="email" [(ngModel)]="email">
+                  <input type="password" required class="form-control" id="password" placeholder="Password" name="password" [(ngModel)]="password">
                   <input type="password"  required class="form-control" id="confirmpassword" placeholder="Confirm password" name="confirmpassword" [(ngModel)]="confirmpassword">
                   <div class="form-button">
                     <button type="submit" class="btn btn-primary">Submit</button>

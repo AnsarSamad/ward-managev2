@@ -11,7 +11,9 @@ import { MatSnackBar } from '@angular/material';
 })
 export class LoginComponent implements OnInit {
 
-  user: User;
+  email:string
+  username:string
+  password:string
   confirmpassword: string;
   mode: string = "login";
   constructor(private service: SharedService, private router: Router, private snackbar: MatSnackBar) {
@@ -22,14 +24,14 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    if(this.user.username.length > 0 && this.user.password.length >0){
-      this.service.validate(this.user.username, this.user.password)
-      .subscribe((res) => {
-        if (res != null && res != false) {
-          if (!res.isApproved) {
-            this.openSnackBar('User not approved yet, Please contact admin', 'Waiting for approval');
+    if(this.username.length > 0 && this.password.length >0){
+      this.service.signIn(this.username, this.password)
+      .subscribe((res:any) => {
+        if (res != null ) {
+          if (!res.status) {
+            this.openSnackBar(res.error, 'Waiting for approval');
           } else {
-            sessionStorage.setItem('user', res.username.toString());
+            sessionStorage.setItem('user', res.user['displayName']);
             sessionStorage.setItem('isAdmin', '' + res.isAdmin);
             this.router.navigate(['/dashboard']);
           }
@@ -45,13 +47,17 @@ export class LoginComponent implements OnInit {
   }
 
   register() {
-    if(this.user.username.length > 0 && this.user.password.length >0 && this.confirmpassword.length >0){
-      if (this.user.password == this.confirmpassword) {
-        this.service.addUser(this.user).subscribe(res => {
-          this.mode = "login";
-          this.reset();
-          this.router.navigate(['/login']);
-          this.openSnackBarv2('User added successfully, You will be able to login only after admin approve you ', 'Waiting for approval', 4000);
+    if(this.email.length > 0 && this.username.length > 0 && this.password.length >0 && this.confirmpassword.length >0){
+      if (this.password == this.confirmpassword) {
+        this.service.signUp(this.email , this.username,this.password).subscribe((res:any) => {
+          if(!res.status){
+            this.openSnackBar(res.error,'');
+          }else{
+            this.mode = "login";
+            this.reset();
+            this.router.navigate(['/login']);
+            this.openSnackBarv2('User added successfully, You will be able to login only after admin approve you ', 'Waiting for approval', 4000);  
+          }
         })
       } else {
         this.openSnackBar('Password and Confirm password does not match', 'Password Mismatch')
@@ -68,11 +74,8 @@ export class LoginComponent implements OnInit {
     this.mode = mode;
   }
   reset() {
-    this.user = {
-      username: '',
-      password: '',
-      isAdmin: false
-    }
+    this.username = "";
+    this.password = "";
   }
   openSnackBarv2(message: string, action: string, duration: number) {
     this.snackbar.open(message, action, {

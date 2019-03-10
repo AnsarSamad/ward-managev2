@@ -1,7 +1,7 @@
 export interface User{
-    id?:string,
-    username:string,
-    password:string,
+    id?:string
+    email:string
+    uid:string
     isAdmin:boolean,
     isApproved?:boolean
 }

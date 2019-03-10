@@ -13,7 +13,7 @@
     <tbody>
       <tr *ngFor="let user of users">
         <td><i class="fas fa-user-md fa-sm"></i></td>
-        <td>{{user.username}}</td>
+        <td>{{user.email}}</td>
         <td>
             <a href="javascript:void(0);" *ngIf="user.isApproved" (click)="approveUser(user,false);">
                 <i class="fas fa-check-double fa-sm"></i>

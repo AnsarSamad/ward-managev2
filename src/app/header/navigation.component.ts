@@ -8,11 +8,11 @@ import {Component, Input, Output ,EventEmitter} from '@angular/core'
 export class NavigationComponent{
 
     @Input() isAdmin:boolean;
-    @Input() loggesInUser:string;
+    @Input() loggedInUser:string;
     @Output() navigation =  new EventEmitter<string>();
 
     constructor(){
-
+        
     }
     navigate(mode:string){
         this.navigation.emit(mode);

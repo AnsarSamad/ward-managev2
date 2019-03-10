@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, observable } from 'rxjs';
 import * as firebase from 'firebase/app';
 import 'firebase/firestore';
+import 'firebase/auth';
 import { Room } from '../room/Room';
 import { User } from '../login/User';
 import { DatePipe } from '@angular/common'
@@ -12,6 +13,7 @@ import { DatePipe } from '@angular/common'
 export class SharedService {
 
   ref = firebase.firestore().collection('room');
+  private auth = firebase.auth()
   constructor(public datePipe: DatePipe) {
   }
 
@@ -172,6 +174,7 @@ export class SharedService {
       })
     })
   }
+
   addUser(user: User): Observable<any> {
     return new Observable((observer) => {
       this.ref.firestore.collection('users').add(user).then(res => {
@@ -179,6 +182,7 @@ export class SharedService {
       })
     })
   }
+
   deleteUser(user: User): Observable<boolean> {
     return new Observable((observer) => {
       this.ref.firestore.collection('users').doc(user.id).delete()
@@ -187,6 +191,7 @@ export class SharedService {
         })
     })
   }
+
   isLoggedIn() {
     var user = sessionStorage.getItem('user');
     return typeof user != 'undefined' && user != null;
@@ -202,4 +207,69 @@ export class SharedService {
     return admin == "true";
   }
 
+  signUp(email:string,username:string,password:string){
+    return new Observable((observer) => {
+      this.auth.createUserWithEmailAndPassword(email,password)     
+      .then(res=>{   
+        // save the user details in user tables too for user management     
+        this.addUser({'uid':res.user.uid,'email':email,'isAdmin':false,isApproved:false}).subscribe(res=>{
+          observer.next({'status':true,'user':res.user});
+        })
+
+        // not waiting for the display name to get updated
+        var user = this.auth.currentUser;
+        user.updateProfile({
+          displayName:username,
+          photoURL:"",
+          
+        }).then(suc=>{
+
+        })
+               
+      })
+      .catch(err=>{
+        observer.next({'status':false,'error':err.message});
+      })
+    })
+  }
+
+  signIn(email:string,password:string){
+    return new Observable((observer) => {
+      this.auth.signInWithEmailAndPassword(email,password)     
+      .then(res=>{
+        console.log(res)
+        this.isUserApproved(email,res.user.uid).then((result)=>{
+          observer.next({'status':true,'user':res.user,'isAdmin':result});  
+        },
+        (err)=>{
+          observer.next({'status':false,'error':'User Not Approved yet'});
+        }
+        )       
+      })
+      .catch(err=>{
+        observer.next({'status':false,'error':err.message});
+      })
+    })
+  }
+
+  isUserApproved(email:string,uid:string){
+   return new Promise((resolve,reject)=>{
+     this.ref.firestore.collection('users')
+    .where('email','==',email)
+    .where('uid','==',uid)
+    .where('isApproved','==',true)
+    .get()
+    .then((res)=>{      
+      if(res.docs.length == 1){
+        resolve(res.docs[0].get('isAdmin') )
+      }else{
+        reject(false)
+      }
+    }).catch(err=>{
+      console.log('error:'+err)
+      reject();
+    })
+
+  })
+}
 }
