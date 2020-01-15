@@ -1,0 +1,27 @@
+
+    
+<mat-drawer-container class="col-md-12" style="margin: 10px;">
+    <mat-drawer mode="side" opened class="col-md-4">
+     
+      <app-sidenav [menuSelected]="menu"></app-sidenav>
+  
+    </mat-drawer>
+    <mat-drawer-content>
+
+        <button mat-button (click)="setMenu('Dashboard')">Dashboard</button>
+
+        <button mat-button (click)="setMenu('Settings')">Settings</button>
+        
+        <button mat-button (click)="setMenu('UserInfo')">UserInfo</button>
+     
+      <div style="background-color:gray;height: 200px;"> Dashboard content
+      <h5>Selected :  {{menu}}</h5>
+      </div>
+      <div style="background-color:seagreen;height: 300px;" >Dashboard content 2</div>
+    </mat-drawer-content>
+  </mat-drawer-container>
+  
+  
+  
+  
+    

@@ -6,9 +6,12 @@ import { LoginComponent } from './login/login.component';
 import { LoginRouteGuard } from './login/login.router.guard';
 import { UsermanageComponent } from './usermanage/usermanage.component';
 import { HistoryComponent } from './history/history.component';
+import { ChartsComponent } from './charts/charts.component';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import { DashComponent } from './dash/dash.component';
 
 const indexRoutes: Route = {
-  path: '', component: LoginComponent
+  path: '', component: DashComponent
 }
 
 const fallbackRoutes: Route = {

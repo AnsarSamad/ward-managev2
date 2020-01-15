@@ -16,7 +16,20 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HistoryComponent } from './history/history.component';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable'
 import { DatePipe } from '@angular/common';
-import { RoomlistComponent } from './roomlist/roomlist.component'
+import { RoomlistComponent } from './roomlist/roomlist.component';
+import { ChartsComponent } from './charts/charts.component'
+import { AngularMultiSelectModule } from 'angular2-multiselect-dropdown';
+import { SidenavComponent } from './sidenav/sidenav.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatCardModule} from '@angular/material/card';
+import { DashComponent } from './dash/dash.component';
+import { MenuComponent } from './menu/menu.component';
+import {MatMenuModule} from '@angular/material/menu';
+import {MatButtonModule} from '@angular/material/button';
+import {MatChipsModule} from '@angular/material/chips';
+
 
 @NgModule({
   declarations: [
@@ -28,7 +41,11 @@ import { RoomlistComponent } from './roomlist/roomlist.component'
     UsermanageComponent,
     HistoryComponent,
     NavigationComponent,
-    RoomlistComponent
+    RoomlistComponent,
+    ChartsComponent,
+    SidenavComponent,
+    DashComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
@@ -36,7 +53,15 @@ import { RoomlistComponent } from './roomlist/roomlist.component'
     AppRoutingModule,
     MatSnackBarModule,
     BrowserAnimationsModule,
-    NgxDatatableModule
+    NgxDatatableModule,
+    AngularMultiSelectModule,
+    MatExpansionModule,
+    MatSidenavModule,
+    MatCheckboxModule,
+    MatCardModule,
+    MatMenuModule,
+    MatButtonModule,
+    MatChipsModule
   ],
   providers: [SharedService, LoginRouteGuard,DatePipe],
   bootstrap: [AppComponent]

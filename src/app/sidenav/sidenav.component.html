@@ -1,0 +1,42 @@
+
+   
+
+<div class="layout-page-side-outer">
+    <div class="layout-page-side" style="top: 30px;">
+        <div class="layout-page-side-inner">
+            <div class="layout-page-filters">
+              
+                <div class="issues-filters-header">
+                    <h3>Filters</h3></div>
+                <div class="search-navigator-facets-list">
+                   
+                    <div class="search-navigator-facet-box">
+                        <div class="search-navigator-facet-header-wrapper">
+                           <span class="search-navigator-facet-header">
+                              <a  (click)="toggle()">
+                                 <svg class="little-spacer-right" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 16 16" width="14" height="14" style="fill: currentcolor;">
+                                    <path d="M13.506 9.289l-5.191 5.184q-0.133 0.133-0.315 0.133t-0.315-0.133l-5.191-5.184q-0.133-0.133-0.133-0.318t0.133-0.318l1.161-1.154q0.133-0.133 0.315-0.133t0.315 0.133l3.715 3.715 3.715-3.715q0.133-0.133 0.315-0.133t0.315 0.133l1.161 1.154q0.133 0.133 0.133 0.318t-0.133 0.318z"></path>
+                                 </svg>
+                                 <!-- react-text: 79 -->Type<!-- /react-text -->
+                              </a>
+                           </span>
+                           <span class="search-navigator-facet-header-value spacer-left spacer-right "></span>
+                        </div>
+                        
+                        <div class="search-navigator-facet-list" *ngIf="expand">
+                                <a *ngFor="let typ of types" (click)="toggleselection(typ)" class="facet search-navigator-facet js-facet {{typ.selected && 'active' || '' }}" data-value="BUG">
+                                  <span class="facet-name"> {{typ.name}}</span>                                  
+                                </a>                               
+                        </div>
+
+                     </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
